@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Leap.Unity;
 
 public class key : MonoBehaviour
 {
@@ -11,21 +12,10 @@ public class key : MonoBehaviour
 
     //get key target 
     public GameObject keyNote;
-
-
-
-    //get key note; 
-
+    //get key note
     public AudioClip note;
-
-
-
     //get animation controller 
-
     Animator keydown;
-
-
-
     //note to display 
 
 
@@ -35,7 +25,6 @@ public class key : MonoBehaviour
     {
 
         piano = FindObjectOfType<AudioSource>();
-
         keydown = keyNote.GetComponent<Animator>();
 
     }
@@ -46,38 +35,20 @@ public class key : MonoBehaviour
 
         if (Input.GetKeyDown("c"))
         {
-
-            keydown.speed = 2;
-            keydown.StartPlayback(); 
+            keydown.Play("C-key",-1,0);
+            keydown.speed = 2; 
             piano.clip = note;
-
             piano.Play();
 
         }
     }
 
-
-
-    //check collision
-
-    void OnCollisionEnter(Collision col)
-
+    void OnTriggerEnter(Collider other)
     {
-
-        //check if piano key is pressed 
-
-        if (col.gameObject == keyNote)
-        {
-
-            keydown.speed = 2;
-
-            piano.clip = note;
-
-            piano.Play();
-
-            Debug.Log("play note");
-
-        }
-
+        Debug.Log("called");
+        keydown.Play("C-key", -1, 0);
+        keydown.speed = 2;
+        piano.clip = note;
+        piano.Play();
     }
 }
