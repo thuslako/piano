@@ -16,6 +16,8 @@ public class key : MonoBehaviour
     public AudioClip note;
     //get animation controller 
     Animator keydown;
+    //get anim name;
+    public AnimationClip anim; 
     //note to display 
 
 
@@ -27,6 +29,7 @@ public class key : MonoBehaviour
         piano = FindObjectOfType<AudioSource>();
         keydown = keyNote.GetComponent<Animator>();
 
+
     }
 
     // Update is called once per frame
@@ -35,7 +38,7 @@ public class key : MonoBehaviour
 
         if (Input.GetKeyDown("c"))
         {
-            keydown.Play("C-key",-1,0);
+            keydown.Play(anim.name);
             keydown.speed = 2; 
             piano.clip = note;
             piano.Play();
@@ -45,8 +48,7 @@ public class key : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("called");
-        keydown.Play("C-key", -1, 0);
+        keydown.Play(anim.name,-1,0);
         keydown.speed = 2;
         piano.clip = note;
         piano.Play();
