@@ -17,9 +17,11 @@ public class key : MonoBehaviour
     //get animation controller 
     Animator keydown;
     //get anim name;
-    public AnimationClip anim; 
+    public AnimationClip anim;
     //note to display 
-
+    public string scalenot; 
+    TextMesh keynote;
+    
 
 
     // Use this for initialization
@@ -28,6 +30,7 @@ public class key : MonoBehaviour
 
         piano = FindObjectOfType<AudioSource>();
         keydown = keyNote.GetComponent<Animator>();
+        keynote = FindObjectOfType<TextMesh>();
 
 
     }
@@ -38,6 +41,7 @@ public class key : MonoBehaviour
 
         if (Input.GetKeyDown("c"))
         {
+
             keydown.Play(anim.name);
             keydown.speed = 2; 
             piano.clip = note;
@@ -48,6 +52,7 @@ public class key : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        keynote.text = scalenot;
         keydown.Play(anim.name,-1,0);
         keydown.speed = 2;
         piano.clip = note;
